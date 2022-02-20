@@ -21,17 +21,3 @@ window.addEventListener("keydown", (event) => {
    }
 
 });
-
-/*function removeField(event) {
-   if (removeTask.length > 0) {
-      for (let item of removeTask) {
-         if (event.target === item) {
-            event.target.closest(".task").remove();
-            break;
-         }
-      }
-   }
-   event.target.addEventListener("click", removeField);
-}
-
-removeField();*/
