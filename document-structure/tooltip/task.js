@@ -2,33 +2,30 @@ const toolTip = Array.from(document.querySelectorAll(".has-tooltip"));
 
 function addTooltipActive(event) {
 
-    if (!event.target.firstElementChild.classList.contains("tooltip_active")) {
-        event.target.firstElementChild.classList.add("tooltip_active");
-    } else {
-        event.target.firstElementChild.classList.remove("tooltip_active");
+    if (event.target.nextElementSibling && !event.target.nextElementSibling.classList.contains("tooltip_active")) {
+        event.target.insertAdjacentHTML("afterEnd", '<div class="tooltip" data-position="top: 0; left: 0;">Текст подсказки</div>');
+        event.target.nextElementSibling.classList.add("tooltip_active");
+    }else if (!event.target.nextElementSibling) {
+        event.target.insertAdjacentHTML("afterEnd", '<div class="tooltip" data-position="top: 0; left: 0;">Текст подсказки</div>');
+        event.target.nextElementSibling.classList.add("tooltip_active");
+    }else {
+        event.target.nextElementSibling.classList.remove("tooltip_active");
     }
 
-
-    for (let tool of toolTip) {
-        if (tool !== event.target && tool.firstElementChild.classList.contains("tooltip_active")) {
-            tool.firstElementChild.classList.remove("tooltip_active");
+    for (let item of toolTip) {
+        if (item.nextElementSibling && item.nextElementSibling !== event.target.nextElementSibling && item.nextElementSibling.classList.contains("tooltip_active")) {
+            item.nextElementSibling.classList.remove("tooltip_active");
         }
     }
 
-    let width_w = event.target.getBoundingClientRect().width;
-    let height_h = event.target.getBoundingClientRect().height;
-    event.target.setAttribute("style", `width: ${width_w}, height: ${height_h}`);
-    event.target.firstElementChild.innerText = event.target.getAttribute("title");
-
     
-    event.target.firstElementChild.setAttribute("style", event.target.firstElementChild.dataset.position);
-    event.target.firstElementChild.style.top = "100%";
-    event.target.firstElementChild.style.left = "0%";
+    let value = event.target.getBoundingClientRect();
+    event.target.nextElementSibling.setAttribute("style", `top: ${value.bottom}px; left: ${value.x}px;`);
+    event.target.nextElementSibling.innerText = event.target.getAttribute("title");   
 }
 
 
 for (let tool of toolTip) {
-    tool.insertAdjacentHTML("afterBegin", '<div class="tooltip" data-position="top: 0; left: 0;">Текст подсказки</div>');
     tool.onclick = function () { return false; }
     tool.addEventListener("click", addTooltipActive);
 }
