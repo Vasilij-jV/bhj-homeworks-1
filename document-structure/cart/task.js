@@ -31,15 +31,47 @@ function addBusket(event) {
 
     const cartProduct = Array.from(document.querySelectorAll(".cart__product"));
 
-    if (cartProduct.length === 0 && cartProduct.length < 1) {
+    /*if (cartProduct.length === 0 && numberValue > 0) {
+        addElem.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`;
+    } else if (cartProduct.length > 0 && numberValue > 0) {
+        cartProduct.find((item) => {
+            if (id === item.dataset.id) {
+                addElem.remove();
+                let number = Number(item.lastElementChild.innerText) + Number(numberValue);
+                item.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${number}</div></div>`;
+            } 
+        });
+    } else if (cartProduct.length > 0 && numberValue > 0) {
+        if (!cartProduct.dataset.includes(id)) {
+            addElem.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`; 
+        }
+    }*/
+
+    /*cartProduct.find((item) => {
+        if (cartProduct.length === 0) {
+            addElem.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`;
+        }
+        if (cartProduct.length > 0 && id === item.dataset.id) {
+            addElem.remove();
+            let number = Number(item.lastElementChild.innerText) + Number(numberValue);
+            item.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${number}</div></div>`;
+        } else if (cartProduct.length === 0 || id !== item.dataset.id) {
+            addElem.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`;
+        }
+    });*/
+
+    if (cartProduct.length === 0 && cartProduct.length < 1 && numberValue > 0) {
         addElem.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`;
     }
 
-    if (cartProduct.length > 0) {
+    if (cartProduct.length > 0 && numberValue > 0) {
         for (let item of cartProduct) {
             if (id === item.dataset.id) {
                 addElem.remove();
-                item.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${numberValue}</div></div>`;
+                let number = Number(item.lastElementChild.innerText) + Number(numberValue);
+                item.outerHTML = `<div class="cart__product" data-id=${id}><img class="cart__product-image" src=${imgSrc}><div class="cart__product-count">${number}</div></div>`;
+                
+
             }
         }
 
